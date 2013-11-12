@@ -1,6 +1,9 @@
 package puma.sp.mgmt.model.attribute;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +26,10 @@ public class AttributeType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    String name;
+    @Column(unique=true)
+    private String name;
+	@Enumerated(EnumType.STRING)
+	private TypeFamily family;
 
     public Long getId() {
         return id;
@@ -39,6 +45,14 @@ public class AttributeType {
     
     public void setName(String theName) {
         this.name = theName;
+    }
+    
+    public TypeFamily getFamily() {
+    	return this.family;
+    }
+    
+    public void setFamily(TypeFamily family) {
+    	this.family = family;
     }
 
     @Override
