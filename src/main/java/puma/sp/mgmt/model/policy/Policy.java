@@ -1,53 +1,30 @@
 package puma.sp.mgmt.model.policy;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
 import puma.sp.mgmt.model.organization.Tenant;
 
 @Entity
-@Inheritance
-@DiscriminatorColumn(name = "TYPE")
-public abstract class Policy {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
-	private String content;
-	@Enumerated(EnumType.STRING)
-	private PolicyType type;
-	@ManyToOne
-	private Tenant definingOrganization;		// Should be of type Organization, which has subclasses [Provider?] Application Provider, Middleware Provider and Tenant.
+public class Policy {
 	
-	public void setId(Long id) {
+	@Id
+	private String id;
+	
+	public void setId(String id) {
 		this.id = id;
 	}
 	
-	public Long getId() {
+	public String getId() {
 		return this.id;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return this.name;
-	}
-	
-	public void setDefiningOrganization(Tenant organization) {
-		this.definingOrganization = organization;
-	}
-	
-	public Tenant getDefiningOrganization() {
-		return this.definingOrganization;
-	}
+
+	@Lob
+	private String content;
 	
 	public void setContent(String content) {
 		this.content = content;
@@ -57,17 +34,42 @@ public abstract class Policy {
 		return this.content;
 	}
 	
+	@Enumerated(EnumType.STRING)
+	private PolicyType policyType;
+	
+	public void setPolicyType(PolicyType policyType) {
+		this.policyType = policyType;
+	}
+	
+	public PolicyType getPolicyType() {
+		return this.policyType;
+	}
+	
+	@ManyToOne
+	private Tenant definingOrganization;		// Should be of type Organization, which has subclasses [Provider?] Application Provider, Middleware Provider and Tenant.
+	
+	public void setDefiningOrganization(Tenant organization) {
+		this.definingOrganization = organization;
+	}
+	
+	public Tenant getDefiningOrganization() {
+		return this.definingOrganization;
+	}
+	
 	public String toXACML() {
 		// Currently, we suppose the policy is stored as a XACML representation
 		return this.getContent();
 	}
 	
-	public void setType(PolicyType type) {
-		this.type = type;
+	public Policy() {
+		// default constructor for the JPA
 	}
 	
-	public PolicyType getType() {
-		return this.type;
+	public Policy(String id, PolicyType policyType, Tenant definingOrganization, String content) {
+		this.id = id;
+		this.policyType = policyType;
+		this.definingOrganization = definingOrganization;
+		this.content = content;
 	}
 	
 }
