@@ -7,4 +7,8 @@ public interface PolicyService {
 	public Policy getApplicationPolicy();
 
 	public void storeApplicationPolicy(String contents);
+	
+	public Policy getCentralPUMAPDPPolicy();
+	
+	public void storeCentralPUMAPDPPolicy(String contents);
 }

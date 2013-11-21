@@ -10,6 +10,8 @@ import puma.sp.mgmt.model.policy.PolicyType;
 public class PolicyServiceImpl implements PolicyService {
 	
 	private static final String APPLICATION_POLICY_ID = "application-policy";
+	
+	private static final String CENTRAL_PUMA_PDP_POLICY_ID = "central-puma-policy";
 
 	@Autowired
 	private PolicyRepository policyRepository;
@@ -30,6 +32,21 @@ public class PolicyServiceImpl implements PolicyService {
 		}
 		ap.setContent(contents);
 		policyRepository.save(ap);
+	}
+
+	@Override
+	public Policy getCentralPUMAPDPPolicy() {
+		return policyRepository.findOne(CENTRAL_PUMA_PDP_POLICY_ID);
+	}
+
+	@Override
+	public void storeCentralPUMAPDPPolicy(String contents) {
+		Policy cpp = policyRepository.findOne(CENTRAL_PUMA_PDP_POLICY_ID);
+		if(cpp == null) {
+			cpp = new Policy(CENTRAL_PUMA_PDP_POLICY_ID, PolicyType.MIDDLEWARE, null, contents);
+		}
+		cpp.setContent(contents);
+		policyRepository.save(cpp);
 	}
 	
 	
