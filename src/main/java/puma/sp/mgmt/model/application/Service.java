@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import puma.sp.mgmt.model.attribute.AttributeType;
+import puma.sp.mgmt.model.attribute.AttributeFamily;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Service {
     private String name;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<puma.sp.mgmt.model.attribute.AttributeType> attributes;
+    private Set<puma.sp.mgmt.model.attribute.AttributeFamily> attributes;
 
     public Long getId() {
         return id;
@@ -48,11 +48,11 @@ public class Service {
         this.name = theName;
     }
     
-    public Set<AttributeType> getAttributes() {
+    public Set<AttributeFamily> getAttributes() {
         return this.attributes;
     }
     
-    public void setAttributes(Set<AttributeType> theList) {
+    public void setAttributes(Set<AttributeFamily> theList) {
         this.attributes = theList;
     }
 

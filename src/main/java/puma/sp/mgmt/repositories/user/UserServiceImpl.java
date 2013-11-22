@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void addUser(User user) {
-		if (this.userDAO.byNameTenant(user.getLoginName(), user.getOrganization()) == null)
+		if (this.userDAO.byNameTenant(user.getLoginName(), user.getTenant()) == null)
 			this.userRepository.saveAndFlush(user);
 		else
 			throw new RuntimeException("Could not add two users with the same login name and affiliated organization");

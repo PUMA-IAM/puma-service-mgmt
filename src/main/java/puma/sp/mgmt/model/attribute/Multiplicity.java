@@ -1,6 +1,6 @@
 package puma.sp.mgmt.model.attribute;
 
-public enum TypeFamily {
+public enum Multiplicity {
 	GROUPED,
 	ATOMIC
 }

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 import puma.sp.mgmt.model.user.User;
 
 /**
@@ -23,9 +24,9 @@ import puma.sp.mgmt.model.user.User;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Attribute.all", query = "SELECT a FROM Attribute a"),
-	@NamedQuery(name = "Attribute.byKey", query = "SELECT a FROM Attribute a WHERE a.attributeKey = :key"),
+	@NamedQuery(name = "Attribute.byFamily", query = "SELECT a FROM Attribute a WHERE a.family = :family"),
 	@NamedQuery(name = "Attribute.byUser", query = "SELECT a FROM Attribute a WHERE a.user = :user"),
-	@NamedQuery(name = "Attribute.byKeyUser", query = "SELECT a FROM Attribute a WHERE a.attributeKey = :key AND a.user = :user")
+	@NamedQuery(name = "Attribute.byFamilyUser", query = "SELECT a FROM Attribute a WHERE a.family = :family AND a.user = :user")
 	})
 @Table(name = "SP_ATTR")
 public class Attribute {
@@ -33,9 +34,12 @@ public class Attribute {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne
-	private AttributeType attributeKey;
-	private Serializable attributeValue;
+	private AttributeFamily family;
+	
+	private Serializable value;
+	
 	@ManyToOne
 	private User user;
 	
@@ -49,20 +53,20 @@ public class Attribute {
 		this.id = id;
 	}
 	
-    public void setAttributeKey(AttributeType key) {
-        this.attributeKey = key;
+    public void setFamily(AttributeFamily family) {
+        this.family = family;
     }
         
-	public AttributeType getAttributeKey() {
-		return this.attributeKey;
+	public AttributeFamily getFamily() {
+		return this.family;
 	}
         
-    public void setAttributeValue(Serializable value) {
-        this.attributeValue = value;
+    public void setValue(Serializable value) {
+        this.value = value;
     }
 	
-	public Serializable getAttributeValue() {
-		return this.attributeValue;
+	public Serializable getValue() {
+		return this.value;
 	}
 	
 	public User getUser() {

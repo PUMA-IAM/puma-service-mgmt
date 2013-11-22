@@ -1,8 +1,10 @@
 package puma.sp.mgmt.model.user;
 
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,9 +26,9 @@ import puma.util.PasswordHasher;
 @NamedQueries({
 	@NamedQuery(name = "User.all", query = "SELECT u FROM User u"),
 	@NamedQuery(name = "User.byId", query = "SELECT u FROM User u WHERE u.id = :id"),
-	@NamedQuery(name = "User.byTenant", query = "SELECT u FROM User u WHERE u.organization = :tenant"),	
-	@NamedQuery(name = "User.byNameTenant", query = "SELECT u FROM User u WHERE u.loginName = :name AND u.organization = :tenant"),	
-	@NamedQuery(name = "User.byNameTenantNULL", query = "SELECT u FROM User u WHERE u.loginName = :name AND u.organization IS NULL")
+	@NamedQuery(name = "User.byTenant", query = "SELECT u FROM User u WHERE u.tenant = :tenant"),	
+	@NamedQuery(name = "User.byNameTenant", query = "SELECT u FROM User u WHERE u.loginName = :name AND u.tenant = :tenant"),	
+	@NamedQuery(name = "User.byNameTenantNULL", query = "SELECT u FROM User u WHERE u.loginName = :name AND u.tenant IS NULL")
 	})
 @Table(name = "APPLICATION_USER")
 public class User {
@@ -36,10 +38,12 @@ public class User {
 	private String loginName;
 	private byte[] passwordHash;
 	private byte[] passwordSalt;	
-    @OneToMany(cascade = CascadeType.REMOVE)
+	
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy="user", fetch=FetchType.EAGER)
     private Set<Attribute> attributes;
+    
 	@ManyToOne
-    private Tenant organization;
+    private Tenant tenant;
         
 	public User() {}
 	public Long getId() {
@@ -88,14 +92,14 @@ public class User {
         this.attributes = attributes;
     }
     
-    public void setOrganization(Tenant t) {
-        this.organization = t;
+    public void setTenant(Tenant t) {
+        this.tenant = t;
         if (t != null && !t.getUsers().contains(this)) {
             t.getUsers().add(this);
         }
     }
     
-    public Tenant getOrganization() {
-        return this.organization;
+    public Tenant getTenant() {
+        return this.tenant;
     }
 }
