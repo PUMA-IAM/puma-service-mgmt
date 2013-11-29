@@ -4,8 +4,6 @@
  */
 package puma.sp.mgmt.model.attribute;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +36,7 @@ public class Attribute {
 	@ManyToOne
 	private AttributeFamily family;
 	
-	private Serializable value;
+	private String value;
 	
 	@ManyToOne
 	private User user;
@@ -61,11 +59,11 @@ public class Attribute {
 		return this.family;
 	}
         
-    public void setValue(Serializable value) {
+    public void setValue(String value) {
         this.value = value;
     }
 	
-	public Serializable getValue() {
+	public String getValue() {
 		return this.value;
 	}
 	

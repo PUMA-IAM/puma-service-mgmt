@@ -1,5 +1,7 @@
 package puma.sp.mgmt.model.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -90,6 +92,15 @@ public class User {
     
     public void setAttributes(Set<Attribute> attributes) {
         this.attributes = attributes;
+    }
+    
+    public List<Attribute> getAttribute(String name) {
+    	// Probably not most efficient way to do so, but will do for demo
+    	List<Attribute> result = new ArrayList<Attribute>();
+    	for (Attribute next: this.getAttributes())
+    		if (next.getFamily().getName().equals(name))
+    			result.add(next);
+    	return result;
     }
     
     public void setTenant(Tenant t) {
