@@ -32,12 +32,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(Long id) {
-		return this.userRepository.byId(id);
+		return this.userRepository.findOne(id);
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		return this.userRepository.all();
+		return this.userRepository.findAll();
 	}
 
 	@Override
@@ -57,6 +57,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User byId(Long id) {
-		return this.userRepository.byId(id);
+		return this.userRepository.findOne(id);
 	}
 }

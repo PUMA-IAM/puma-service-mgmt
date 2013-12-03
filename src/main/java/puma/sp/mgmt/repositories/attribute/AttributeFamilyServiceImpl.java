@@ -1,5 +1,7 @@
 package puma.sp.mgmt.repositories.attribute;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class AttributeFamilyServiceImpl implements AttributeFamilyService {
 	@Override
 	public AttributeFamily findOne(Long id) {
 		return attributeFamilyRepository.findOne(id);
+	}
+
+	@Override
+	public List<AttributeFamily> findAll() {
+		return this.attributeFamilyRepository.findAll();
 	}
 
 }
