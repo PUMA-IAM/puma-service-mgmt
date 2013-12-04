@@ -22,7 +22,8 @@ import puma.sp.mgmt.model.organization.Organization;
 @NamedQueries({
 	@NamedQuery(name = "AttributeFamily.all", query = "SELECT a FROM AttributeFamily a"),
 	@NamedQuery(name = "AttributeFamily.byId", query = "SELECT a FROM AttributeFamily a WHERE a.id = :id"),
-	@NamedQuery(name = "AttributeFamily.byName", query = "SELECT a FROM AttributeFamily a WHERE a.name = :name")
+	@NamedQuery(name = "AttributeFamily.byName", query = "SELECT a FROM AttributeFamily a WHERE a.name = :name"),
+	@NamedQuery(name = "AttributeFamily.byOrganization", query = "SELECT a FROM AttributeFamily a WHERE a.definedBy = :organization")	
 	})
 @Table(name = "SP_ATTRTYPE")
 public class AttributeFamily {
@@ -33,6 +34,9 @@ public class AttributeFamily {
     
     @Column
     private String name;
+    
+    @Column
+    private String xacmlIdentifier;
 	
     @Enumerated(EnumType.STRING)
 	private Multiplicity multiplicity;
@@ -81,6 +85,14 @@ public class AttributeFamily {
 
 	public void setDefinedBy(Organization definedBy) {
 		this.definedBy = definedBy;
+	}
+	
+	public String getXacmlIdentifier() {
+		return this.xacmlIdentifier;
+	}
+	
+	public void setXacmlIdentifier(String other) {
+		this.xacmlIdentifier = other;
 	}
 	
 	public AttributeFamily() {
