@@ -6,10 +6,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import puma.sp.mgmt.model.organization.Tenant;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Policy.all", query = "SELECT p FROM Policy p"),
+	@NamedQuery(name = "Policy.byId", query = "SELECT p FROM Policy p WHERE p.id = :id"),
+	@NamedQuery(name = "Policy.byOrganization", query = "SELECT p FROM Policy p WHERE p.definingOrganization = :organization")	
+})
 public class Policy {
 	
 	@Id

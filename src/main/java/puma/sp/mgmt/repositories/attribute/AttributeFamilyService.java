@@ -17,6 +17,6 @@ public interface AttributeFamilyService {
 	
 	public void add(AttributeFamily af);
 	
-	public void delete(AttributeFamily af);
+	public void delete(Long af);
 
 }

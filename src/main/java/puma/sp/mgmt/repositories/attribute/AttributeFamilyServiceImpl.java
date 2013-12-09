@@ -28,8 +28,8 @@ public class AttributeFamilyServiceImpl implements AttributeFamilyService {
 	}
 
 	@Override
-	public void delete(AttributeFamily af) {
-		this.attributeFamilyRepository.delete(af.getId());
+	public void delete(Long af) {
+		this.attributeFamilyRepository.delete(af);
 	}
 
 	@Override

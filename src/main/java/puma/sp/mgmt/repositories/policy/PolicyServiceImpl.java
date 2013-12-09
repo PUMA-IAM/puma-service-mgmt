@@ -1,8 +1,11 @@
 package puma.sp.mgmt.repositories.policy;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import puma.sp.mgmt.model.organization.Organization;
 import puma.sp.mgmt.model.policy.Policy;
 import puma.sp.mgmt.model.policy.PolicyType;
 
@@ -47,6 +50,21 @@ public class PolicyServiceImpl implements PolicyService {
 		}
 		cpp.setContent(contents);
 		policyRepository.save(cpp);
+	}
+
+	@Override
+	public List<Policy> getPolicies(Organization organization) {
+		return this.policyDAO.getPolicies(organization);
+	}
+
+	@Override
+	public void storePolicy(Policy policy) {
+		this.policyRepository.save(policy);
+	}
+
+	@Override
+	public void removePolicy(String policyId) {
+		this.policyRepository.delete(policyId);
 	}
 	
 	
