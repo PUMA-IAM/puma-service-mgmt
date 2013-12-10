@@ -218,6 +218,6 @@ public class Tenant extends Organization {
 
 	@Override
 	public int hashCode() {
-		return this.getName().hashCode();
+		return this.getId().intValue();
 	}
 }
