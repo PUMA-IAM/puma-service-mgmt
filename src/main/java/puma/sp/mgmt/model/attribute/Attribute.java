@@ -28,7 +28,7 @@ import puma.sp.mgmt.model.user.User;
 	})
 @Table(name = "SP_ATTR")
 public class Attribute {
-	// TODO Implement class hierarchy with specification to entity field.
+	// LATER Implement class hierarchy with specification to entity field.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

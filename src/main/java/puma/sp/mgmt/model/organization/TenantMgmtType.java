@@ -10,8 +10,17 @@ package puma.sp.mgmt.model.organization;
  */
 public enum TenantMgmtType {
 	
-	Locally,
-	FederatedAuthentication,
-	FederatedAuthorization();
-
+	Locally("Local authentication and authorization"),
+	FederatedAuthentication("Federated authentication, local authorization"),
+	FederatedAuthorization("Federated authentication, federated authorization");
+	
+	private String description;
+	
+	private TenantMgmtType(String desc) {
+		this.description = desc;
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}
 }

@@ -1,5 +1,7 @@
 package puma.sp.mgmt.repositories.user;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,11 +19,12 @@ public class SessionRequestDAOImpl implements SessionRequestDAO {
 	public SessionRequest bySessionId(String id) {
 		TypedQuery<SessionRequest> query = em.createNamedQuery("SessionRequest.bySessionId", SessionRequest.class);
 		query.setParameter("id", id);
-		if (query.getResultList().isEmpty())
+		List<SessionRequest> result = query.getResultList();
+		if (result.isEmpty())
 			return null;
-		if (query.getResultList().size() != 1)
+		if (result.size() != 1)
 			throw new RuntimeException("Could not find a unique session request for id " + id + ": multiple exist!");
-		return query.getResultList().get(0);
+		return result.get(0);
 	}
 
 }

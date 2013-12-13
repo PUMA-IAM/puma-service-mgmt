@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AttributeDAOImpl implements AttributeDAO {
 	
+	@SuppressWarnings("unused")
 	@PersistenceContext
 	private EntityManager em;
 }

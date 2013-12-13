@@ -1,10 +1,7 @@
 package puma.sp.mgmt.repositories.user;
 
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import puma.sp.mgmt.model.organization.Tenant;
 import puma.sp.mgmt.model.user.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {

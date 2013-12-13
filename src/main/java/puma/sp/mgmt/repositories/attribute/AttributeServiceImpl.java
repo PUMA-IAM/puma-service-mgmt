@@ -10,9 +10,6 @@ public class AttributeServiceImpl implements AttributeService {
 	
 	@Autowired
 	private AttributeRepository attributeRepository;
-	
-	@Autowired
-	private AttributeDAO attributeDAO;
 
 	@Override
 	public Attribute findOne(Long id) {

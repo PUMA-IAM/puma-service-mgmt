@@ -29,9 +29,6 @@ import puma.sp.mgmt.model.user.User;
 		@NamedQuery(name = "Tenant.subtenants", query = "SELECT t FROM Tenant t WHERE t.superTenant = :tenant") })
 public class Tenant extends Organization {
 	
-	// TODO Subclass properly and efficiently to Organization. Which method is
-	// best used? (Single Table, Join-per-subclass, Table-per-class)
-
 	private TenantMgmtType managementType; // For Federated, hierarchical
 											// authentication use IdP Proxying
 											// (https://spaces.internet2.edu/display/GS/SAMLIdPProxy)
@@ -127,8 +124,7 @@ public class Tenant extends Organization {
 	 * @return
 	 */
 	public Boolean isAuthenticationLocallyManaged() {
-		return this.getManagementType() == TenantMgmtType.Locally
-				|| this.getManagementType() == TenantMgmtType.FederatedAuthentication;
+		return this.getManagementType() == TenantMgmtType.Locally;
 	}
 
 	/**
