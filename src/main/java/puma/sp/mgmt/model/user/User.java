@@ -1,5 +1,7 @@
 package puma.sp.mgmt.model.user;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -64,7 +66,7 @@ public class User {
 		this.loginName = name;
 	}
 	
-	public void setPassword(String password) {
+	public void setPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
     	byte[] salt = PasswordHasher.generateSalt();
     	this.setPasswordSalt(salt);
     	this.setPasswordHash(PasswordHasher.getHashValue(password, salt));		
