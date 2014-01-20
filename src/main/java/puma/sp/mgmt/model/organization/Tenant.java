@@ -44,7 +44,7 @@ public class Tenant extends Organization {
 	@ManyToMany(targetEntity = Service.class)
 	private List<Service> subscribedTo;
 
-	@ManyToOne
+	@ManyToOne(cascade={})
 	private Tenant superTenant;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="superTenant", fetch=FetchType.EAGER)
@@ -134,7 +134,7 @@ public class Tenant extends Organization {
 	 * @return
 	 */
 	public Boolean isAuthorizationLocallyManaged() {
-		return this.getManagementType() == TenantMgmtType.FederatedAuthorization;
+		return this.getManagementType() != TenantMgmtType.FederatedAuthorization;
 	}
 
 	public Boolean hasFederatedAuthorization() {

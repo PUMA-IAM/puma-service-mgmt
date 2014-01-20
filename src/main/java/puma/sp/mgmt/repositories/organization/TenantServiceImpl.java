@@ -13,6 +13,9 @@ public class TenantServiceImpl implements TenantService {
 	private TenantRepository repository;
 	
 	@Autowired
+	private OrganizationRepository orgRep;
+	
+	@Autowired
 	private TenantDAO dao;
 	
 	@Override
@@ -22,7 +25,7 @@ public class TenantServiceImpl implements TenantService {
 
 	@Override
 	public void deleteTenant(Long tenantId) {
-		this.repository.delete(tenantId);
+		this.orgRep.delete(tenantId);
 	}
 
 	@Override
