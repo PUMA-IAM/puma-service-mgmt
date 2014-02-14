@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -40,8 +41,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
 	private String loginName;
-	private byte[] passwordHash;
-	private byte[] passwordSalt;	
+	@Column(length = 100)
+	private String password;
 	
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy="user", fetch=FetchType.EAGER)
     private Set<Attribute> attributes;
@@ -67,27 +68,13 @@ public class User {
 	}
 	
 	public void setPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-    	byte[] salt = PasswordHasher.generateSalt();
-    	this.setPasswordSalt(salt);
-    	this.setPasswordHash(PasswordHasher.getHashValue(password, salt));		
+    	this.password = password;
 	}
 	
-	public byte[] getPasswordHash() {
-		return this.passwordHash;
+	public String getPassword() {
+		return this.password;
 	}
 	
-	public void setPasswordHash(byte[] hash) {
-		this.passwordHash = hash;
-	}
-	
-	public byte[] getPasswordSalt() {
-		return this.passwordSalt;
-	}
-	
-	public void setPasswordSalt(byte[] salt) {
-		this.passwordSalt = salt;
-	}
-        
     public Set<Attribute> getAttributes() {
         return this.attributes;
     }
