@@ -40,6 +40,9 @@ public class AttributeFamily {
 	
     @Enumerated(EnumType.STRING)
 	private Multiplicity multiplicity;
+    
+    @Enumerated(EnumType.STRING)
+    private RetrievalStrategy retrievalStrategy;
 
     @Enumerated(EnumType.STRING)
     private DataType dataType;
@@ -69,6 +72,14 @@ public class AttributeFamily {
     
     public void setMultiplicity(Multiplicity multiplicity) {
     	this.multiplicity = multiplicity;
+    }
+    
+    public RetrievalStrategy getRetrievalStrategy() {
+    	return this.retrievalStrategy;
+    }
+    
+    public void setRetrievalStrategy(RetrievalStrategy strategy) {
+    	this.retrievalStrategy = strategy;
     }
 
     public DataType getDataType() {
