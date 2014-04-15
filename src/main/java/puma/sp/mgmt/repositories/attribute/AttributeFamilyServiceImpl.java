@@ -53,4 +53,9 @@ public class AttributeFamilyServiceImpl implements AttributeFamilyService {
 		result.addAll(this.attributeFamilyDAO.findAllOrganization(org));
 		return result;
 	}
+
+	@Override
+	public List<AttributeFamily> byName(String xacmlIdentifier) {
+		return this.attributeFamilyDAO.byName(xacmlIdentifier);
+	}
 }

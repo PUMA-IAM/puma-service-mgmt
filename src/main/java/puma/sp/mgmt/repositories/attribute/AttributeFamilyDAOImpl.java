@@ -23,5 +23,16 @@ public class AttributeFamilyDAOImpl implements AttributeFamilyDAO {
 		query = em.createNamedQuery("AttributeFamily.byOrganization", AttributeFamily.class);
 		query.setParameter("organization", org);
 		return query.getResultList();
+	}
+
+	@Override
+	public List<AttributeFamily> byName(String xacmlIdentifier) {
+		if (xacmlIdentifier == null) {
+			throw new RuntimeException("Could not execute query: null pointer xacml id");
+		}
+		TypedQuery<AttributeFamily> query = null;
+		query = em.createNamedQuery("AttributeFamily.byOrganization", AttributeFamily.class);
+		query.setParameter("name", xacmlIdentifier);
+		return query.getResultList();
 	}	
 }

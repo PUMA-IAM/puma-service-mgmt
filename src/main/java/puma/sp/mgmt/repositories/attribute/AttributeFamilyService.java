@@ -15,6 +15,8 @@ public interface AttributeFamilyService {
 	
 	public List<AttributeFamily> findAllOrganizationProvider(Organization org);
 	
+	public List<AttributeFamily> byName(String xacmlIdentifier);
+	
 	public void add(AttributeFamily af);
 	
 	public void delete(Long af);

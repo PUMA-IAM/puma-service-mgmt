@@ -22,7 +22,7 @@ import puma.sp.mgmt.model.organization.Organization;
 @NamedQueries({
 	@NamedQuery(name = "AttributeFamily.all", query = "SELECT a FROM AttributeFamily a"),
 	@NamedQuery(name = "AttributeFamily.byId", query = "SELECT a FROM AttributeFamily a WHERE a.id = :id"),
-	@NamedQuery(name = "AttributeFamily.byName", query = "SELECT a FROM AttributeFamily a WHERE a.name = :name"),
+	@NamedQuery(name = "AttributeFamily.byName", query = "SELECT a FROM AttributeFamily a WHERE a.xacmlIdentifier = :name"),
 	@NamedQuery(name = "AttributeFamily.byOrganization", query = "SELECT a FROM AttributeFamily a WHERE a.definedBy = :organization")	
 	})
 @Table(name = "SP_ATTRTYPE")
