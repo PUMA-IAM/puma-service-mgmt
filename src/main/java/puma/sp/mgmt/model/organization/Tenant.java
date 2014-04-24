@@ -176,7 +176,7 @@ public class Tenant extends Organization {
 	}
 
 	public void setSuperTenant(Tenant tenant) {
-		if (tenant.hasAncestor(this))
+		if (tenant != null && tenant.hasAncestor(this))
 			throw new RuntimeException(
 					"Could not set new supertenant, already amongst ancestors");
 		this.superTenant = tenant;
