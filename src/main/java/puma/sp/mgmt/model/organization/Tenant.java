@@ -19,6 +19,7 @@
  ******************************************************************************/
 package puma.sp.mgmt.model.organization;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -71,6 +74,9 @@ public class Tenant extends Organization {
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy="tenant", fetch=FetchType.EAGER)
 	private Set<User> users;
+	
+	@Enumerated(EnumType.STRING)
+	private PolicyLangType policyLanguage;
 
 	public Tenant() {
 	}
@@ -82,18 +88,27 @@ public class Tenant extends Organization {
 	 * @return
 	 */
 	public Tenant(String name, TenantMgmtType mgmtType, String authnEndpoint,
-			String idpPublicKey, String attrEndpoint, String authzEndpoint) {
+			String idpPublicKey, String attrEndpoint, String authzEndpoint, PolicyLangType policyLanguage) {
 		super(name);
 		this.managementType = mgmtType;
 		this.authnRequestEndpoint = authnEndpoint;
 		this.identityProviderPublicKey = idpPublicKey;
 		this.attrRequestEndpoint = attrEndpoint;
 		this.authzRequestEndpoint = authzEndpoint;
+		this.policyLanguage = policyLanguage;
 		
 		this.superTenant = null;
 		this.subtenants = new HashSet<Tenant>();
 		this.subscribedTo = new LinkedList<Service>();
 		this.users = new HashSet<User>();
+	}
+
+	public PolicyLangType getPolicyLanguage() {
+		return policyLanguage;
+	}
+
+	public void setPolicyLanguage(PolicyLangType policyLanguage) {
+		this.policyLanguage = policyLanguage;
 	}
 
 	public Set<User> getUsers() {

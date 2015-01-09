@@ -23,6 +23,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import puma.sp.mgmt.model.policy.Policy;
 
-public interface PolicyRepository extends JpaRepository<Policy, String> {
+public interface PolicyRepository extends JpaRepository<Policy, Policy.Key> {
 	
 }

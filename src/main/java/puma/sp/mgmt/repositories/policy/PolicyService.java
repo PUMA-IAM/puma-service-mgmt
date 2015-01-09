@@ -22,21 +22,22 @@ package puma.sp.mgmt.repositories.policy;
 import java.util.List;
 
 import puma.sp.mgmt.model.organization.Organization;
+import puma.sp.mgmt.model.organization.PolicyLangType;
 import puma.sp.mgmt.model.policy.Policy;
 
 public interface PolicyService {
 
-	public Policy getApplicationPolicy();
+	public Policy getApplicationPolicy(PolicyLangType type);
 
-	public void storeApplicationPolicy(String contents);
+	public void storeApplicationPolicy(String contents, PolicyLangType type);
 	
-	public Policy getCentralPUMAPDPPolicy();
+	public Policy getCentralPUMAPDPPolicy(PolicyLangType type);
 	
-	public void storeCentralPUMAPDPPolicy(String contents);
+	public void storeCentralPUMAPDPPolicy(String contents, PolicyLangType type);
 	
 	public List<Policy> getPolicies(Organization organization);
 	
 	public void storePolicy(Policy policy);
 	
-	public void removePolicy(String policyId);
+	public void removePolicy(String policyId, PolicyLangType type);
 }

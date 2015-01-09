@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import puma.sp.mgmt.model.organization.Organization;
+import puma.sp.mgmt.model.organization.PolicyLangType;
 import puma.sp.mgmt.model.policy.Policy;
 import puma.sp.mgmt.model.policy.PolicyType;
 
@@ -42,30 +43,30 @@ public class PolicyServiceImpl implements PolicyService {
 	private PolicyDAO policyDAO;
 
 	@Override
-	public Policy getApplicationPolicy() {
-		return policyRepository.findOne(APPLICATION_POLICY_ID);
+	public Policy getApplicationPolicy(PolicyLangType type) {
+		return policyRepository.findOne(new Policy.Key(APPLICATION_POLICY_ID, type));
 	}
 
 	@Override
-	public void storeApplicationPolicy(String contents) {
-		Policy ap = policyRepository.findOne(APPLICATION_POLICY_ID);
+	public void storeApplicationPolicy(String contents, PolicyLangType type) {
+		Policy ap = policyRepository.findOne(new Policy.Key(APPLICATION_POLICY_ID, type));
 		if(ap == null) {
-			ap = new Policy(APPLICATION_POLICY_ID, PolicyType.APPLICATION, null, contents);
+			ap = new Policy(APPLICATION_POLICY_ID, type, PolicyType.APPLICATION, null, contents);
 		}
 		ap.setContent(contents);
 		policyRepository.save(ap);
 	}
 
 	@Override
-	public Policy getCentralPUMAPDPPolicy() {
-		return policyRepository.findOne(CENTRAL_PUMA_PDP_POLICY_ID);
+	public Policy getCentralPUMAPDPPolicy(PolicyLangType type) {
+		return policyRepository.findOne(new Policy.Key(CENTRAL_PUMA_PDP_POLICY_ID, type));
 	}
 
 	@Override
-	public void storeCentralPUMAPDPPolicy(String contents) {
-		Policy cpp = policyRepository.findOne(CENTRAL_PUMA_PDP_POLICY_ID);
+	public void storeCentralPUMAPDPPolicy(String contents, PolicyLangType type) {
+		Policy cpp = policyRepository.findOne(new Policy.Key(CENTRAL_PUMA_PDP_POLICY_ID, type));
 		if(cpp == null) {
-			cpp = new Policy(CENTRAL_PUMA_PDP_POLICY_ID, PolicyType.MIDDLEWARE, null, contents);
+			cpp = new Policy(CENTRAL_PUMA_PDP_POLICY_ID, type, PolicyType.MIDDLEWARE, null, contents);
 		}
 		cpp.setContent(contents);
 		policyRepository.save(cpp);
@@ -82,8 +83,8 @@ public class PolicyServiceImpl implements PolicyService {
 	}
 
 	@Override
-	public void removePolicy(String policyId) {
-		this.policyRepository.delete(policyId);
+	public void removePolicy(String policyId, PolicyLangType type) {
+		this.policyRepository.delete(new Policy.Key(policyId, type));
 	}
 	
 	
