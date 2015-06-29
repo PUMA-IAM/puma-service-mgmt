@@ -99,6 +99,16 @@ public class Policy {
 		return this.definingOrganization;
 	}
 	
+	private boolean enabled;
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
 	public String toXACML() {
 		// Currently, we suppose the policy is stored as a XACML representation
 		return this.getContent();
@@ -114,6 +124,7 @@ public class Policy {
 		this.policyType = policyType;
 		this.definingOrganization = definingOrganization;
 		this.content = content;
+		this.enabled = true;
 	}
 	
 	public static class Key implements Serializable {
